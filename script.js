@@ -1,106 +1,134 @@
-// create variable "getComputerChoice"
-
-// "getComputerChoice" should generate a random choice between ("rock", "paper", "scissors")
-
-// use the "Math.random" method to generate a randon number between 0 and 1 and tie that value to one of the 3 choices
 let computerScore = 0
 let yourScore = 0
+let humanChoice = "";
+let computerChoice = "";
+let result = "";
+let computerChoiceText = "";
 
-for (let i = 0; i < 5; i++){
 
 
-function getHumanChoice(){ 
-    let humanChoice = prompt("Rock, Paper or Scissors")
-    console.log(humanChoice.toLowerCase())
-    return humanChoice.toLowerCase()
+let rockButton = document.getElementById("Rock")
+rockButton.addEventListener("click", displayResult)
+
+let paperButton = document.getElementById("Paper")
+paperButton.addEventListener("click", displayResult)
+
+let scissorsButton = document.getElementById("Scissors")
+scissorsButton.addEventListener("click", displayResult)
+
+
+function displayResult(event) {
+    humanChoice = event.currentTarget.textContent;
+    console.log("Your choice:" + " " + event.currentTarget.textContent)
+    computerChoice = getComputerChoice()
+    result = playRound(humanChoice, computerChoice);
+    if (result === "You win") {
+        yourScore++
+        console.log("Your score", yourScore)
+
+    }
+
+    if (result === "You lose") {
+        computerScore++
+        console.log("Computer score", computerScore)
+
+    }
+    document.getElementById("statusDisplay").textContent = "Your pick: " + humanChoice + " " + " | Computer pick: " + computerChoiceText + " | Result: " + result;
+    document.getElementById("scoreDisplay").textContent = "Your Score: " + yourScore + " | Computer Score: " + computerScore;
+
+ 
+
+    if (yourScore === 5) {
+        yourScore = 0;
+        computerScore = 0;
+        alert("You won")
+
+    }
+    if (computerScore === 5) {
+        yourScore = 0;
+        computerScore = 0;
+        alert("You lost")
+
+    }
 
 }
 
 
-function getComputerChoice (){
+
+
+function getComputerChoice() {
     let computerChoice = Math.floor(Math.random() * 3)
-    if (computerChoice === 0 )
-        console.log("rock")
-    if (computerChoice === 1)
-        console.log("paper")
-    if (computerChoice === 2)
-        console.log("scissors")
+    if (computerChoice === 0){
+        computerChoiceText = "Rock"
+    console.log("Computer choice: Rock")
     return computerChoice
+    }
+    if (computerChoice === 1){
+        computerChoiceText = "Paper"
+    console.log("Computer choice: Paper")
+      return computerChoice
+    }
+    if (computerChoice === 2){
+        computerChoiceText = "Scissors"
+    console.log("Computer choice: Scissors")
+      return computerChoice
+        }
 }
 
 
-let result = playRound(getHumanChoice(), getComputerChoice());
-if (result === "You win"){
-    yourScore++
-    console.log("Your score", yourScore)
-   
-}
-
- if (result === "You lose") {
-    computerScore++
-    console.log("Computer score", computerScore)
-   
- }  
 
 
-}
-
-alert("FINAL SCORE - You:" + " " + yourScore + " " + "Computer:" + " " + computerScore);
-console.log("FINAL SCORE - You:" + " " + yourScore + " " + "Computer:" + " " + computerScore);
-
-
-
-function playRound(humanChoice, computerChoice){
-    if (humanChoice === "rock" && computerChoice === 0){
-        console.log("tie")
-                return "tie"
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === "Rock" && computerChoice === 0) {
+        console.log("Tie")
+        return "Tie"
     }
-        
-    if (humanChoice === "paper" && computerChoice === 1){
-        console.log("tie")
-             return "tie"
+
+    if (humanChoice === "Paper" && computerChoice === 1) {
+        console.log("Tie")
+        return "Tie"
     }
-        
-    if (humanChoice === "scissors" && computerChoice === 2){
-        console.log("tie")
-             return "tie"
+
+    if (humanChoice === "Scissors" && computerChoice === 2) {
+        console.log("Tie")
+        return "Tie"
     }
-        
-    if (humanChoice === "rock" && computerChoice === 1){
-         console.log("You lose")
-             return "You lose"
+
+    if (humanChoice === "Rock" && computerChoice === 1) {
+        console.log("You lose")
+        return "You lose"
     }
-       
-    if (humanChoice === "rock" && computerChoice === 2){
+
+    if (humanChoice === "Rock" && computerChoice === 2) {
         console.log("You win")
-             return "You win"
+        return "You win"
     }
-        
-    if (humanChoice === "paper" && computerChoice === 0){
+
+    if (humanChoice === "Paper" && computerChoice === 0) {
         console.log("You win")
-             return "You win"
+        return "You win"
     }
-        
-    if (humanChoice === "paper" && computerChoice === 2){
-         console.log("You lose")
-             return "You lose"
+
+    if (humanChoice === "Paper" && computerChoice === 2) {
+        console.log("You lose")
+        return "You lose"
     }
-    
+
+
+
+    if (humanChoice === "Scissors" && computerChoice === 0) {
+        console.log("You lose")
+        return "You lose"
+    }
+
+
+
+    if (humanChoice === "Scissors" && computerChoice === 1) {
+        console.log("You win")
+        return "You win"
+    }
        
 
-    if (humanChoice === "scissors" && computerChoice === 0){
-         console.log("You lose")
-         return "You lose"
-    }
-        
-       
-        
-    if (humanChoice === "scissors" && computerChoice === 1){
-         console.log("You win")
-        return "you win"
-    }
-       
-``
 
 }
 
